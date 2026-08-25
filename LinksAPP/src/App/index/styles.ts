@@ -10,7 +10,7 @@ export const styles = StyleSheet.create ({
     },
 
     title: {
-        color: "colors.green[900]",
+        color: colors.green[900],
         fontSize: 20
     },
 })
