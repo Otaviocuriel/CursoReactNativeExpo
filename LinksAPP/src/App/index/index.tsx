@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, FlatList } from "react-native";
+import { View, Image, TouchableOpacity, FlatList, Modal } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { styles } from "./styles";
@@ -35,6 +35,9 @@ export default function Index() {
         contentContainerStyle={styles.linksContent}
         showsVerticalScrollIndicator={false}
       />
+      <Modal transparent visible={true}>
+
+      </Modal>
     </View>
   );
 }
