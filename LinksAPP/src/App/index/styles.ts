@@ -66,6 +66,16 @@ export const styles = StyleSheet.create ({
     modalUrl:{
         fontSize: 14,
         color: colors.gray[400],
+    },
+    modalFooter:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: 32,
+        width: "100%",
+        borderTopWidth: 1,
+        borderTopColor: colors.gray[800],
+        paddingVertical: 14, 
     }
 })
 
