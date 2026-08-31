@@ -6,6 +6,7 @@ import { styles } from "./styles";
 import { colors } from "@/styles/colors";
 import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
+import { Button } from "@/components/button";
 
 export default function AddHeader() {
   return (
@@ -27,6 +28,7 @@ export default function AddHeader() {
       <View style={styles.form}>
         <Input placeholder="Nome do link" />
         <Input placeholder="URL do link" />
+        <Button title="Adicionar link" />
       </View>
     </View>
   );
