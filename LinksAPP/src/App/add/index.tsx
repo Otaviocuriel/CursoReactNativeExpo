@@ -26,7 +26,7 @@ export default function AddHeader() {
       <Text style={styles.label}>Selecenione uma categoria</Text>
       <Categories />
       <View style={styles.form}>
-        <Input placeholder="Nome do link" />
+        <Input placeholder="Nome do link" onChangeText={console.log}  />
         <Input placeholder="URL do link" />
         <Button title="Adicionar link" />
       </View>
