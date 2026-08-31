@@ -1,12 +1,29 @@
-import {View, Text} from 'react-native';
-import {MaterialIcons} from '@expo/vector-icons';
-import {styles} from './styles';
-import {colors} from '@/styles/colors';
+import { View, Text, TouchableOpacity } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export function AddHeader() {
-    return (
-        <view style={styles.container}>
-            <view style={styles.header}/>
-        </view>
-    )
+import { styles } from "./styles";
+import { colors } from "@/styles/colors";
+
+export default function AddHeader() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity>
+          <MaterialIcons
+            name="arrow-back-ios"
+            size={32}
+            color={colors.gray[200]}
+          />
+        </TouchableOpacity>
+
+        <Text style={styles.title}>
+          Novo
+        </Text>
+      </View>
+
+      <Text style={styles.label}>
+        Selecenione uma categoria
+      </Text>
+    </View>
+  );
 }
