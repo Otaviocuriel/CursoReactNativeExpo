@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 
 import { styles } from "./styles";
 import { colors } from "@/styles/colors";
@@ -17,7 +17,7 @@ import { categories } from "@/utils/categories";
 import { Categories } from "@/components/categories";
 import { Link } from "@/components/link";
 import { Option } from "@/components/option";
-import { linkStorage, LinkStorage  } from "@/strorage/link-storage";
+import { linkStorage, LinkStorage } from "@/strorage/link-storage";
 
 export default function Index() {
   const [links, setLinks] = useState<LinkStorage[]>([]);
@@ -26,15 +26,17 @@ export default function Index() {
   async function getLinks() {
     try {
       const response = await linkStorage.get();
-      setLinks(response)
+      setLinks(response);
     } catch (error) {
-      Alert.alert("Erro","Não foi possível carregar os links!");
+      Alert.alert("Erro", "Não foi possível carregar os links!");
     }
   }
 
-  useEffect(() => {
-    getLinks();
-  }, [category]);
+  useFocusEffect(
+    useCallback(() => {
+      getLinks();
+    }, []),
+  );
 
   return (
     <View style={styles.container}>
