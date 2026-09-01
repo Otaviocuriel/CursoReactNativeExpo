@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
@@ -15,6 +15,17 @@ export default function AddHeader() {
   const [url, setUrl] = useState("");
 
   function handleAdd() {
+    if (!category) {
+      return Alert.alert("Categoria", "Selecione uma categoria!");
+    }
+
+    if (!name.trim()) {
+      return Alert.alert("Nome", "Informe o nome do link!");
+    }
+
+    if (!url.trim()) {
+      return Alert.alert("URL", "Informe a URL do link!");
+    }
     console.log({ name, url, category });
   }
 
