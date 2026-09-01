@@ -21,7 +21,7 @@ export default function AddHeader() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.replace("/index")}>
+        <TouchableOpacity onPress={() => router.back()}>
           <MaterialIcons
             name="arrow-back-ios"
             size={32}
