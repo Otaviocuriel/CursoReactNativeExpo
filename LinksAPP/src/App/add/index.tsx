@@ -1,14 +1,22 @@
+import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 
-import { styles } from "./styles";
+import { styles } from "./_styles";
 import { colors } from "@/styles/colors";
 import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 
 export default function AddHeader() {
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
+
+  function handleAdd() {
+    console.log({name, url});
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -23,12 +31,12 @@ export default function AddHeader() {
         <Text style={styles.title}>Novo</Text>
       </View>
 
-      <Text style={styles.label}>Selecenione uma categoria</Text>
+      <Text style={styles.label}>Selecione uma categoria</Text>
       <Categories />
       <View style={styles.form}>
-        <Input placeholder="Nome do link" onChangeText={console.log}  />
-        <Input placeholder="URL do link" />
-        <Button title="Adicionar link" />
+        <Input placeholder="Nome do link" onChangeText={setName} autoCorrect={false} />
+        <Input placeholder="URL do link" onChangeText={setUrl}  autoCorrect={false}/>
+        <Button title="Adicionar link" onPress={handleAdd} />
       </View>
     </View>
   );
