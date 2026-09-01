@@ -10,17 +10,18 @@ import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 
 export default function AddHeader() {
+  const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
 
   function handleAdd() {
-    console.log({name, url});
+    console.log({ name, url, category });
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
+        <TouchableOpacity onPress={() => router.replace("/index")}>
           <MaterialIcons
             name="arrow-back-ios"
             size={32}
@@ -32,10 +33,18 @@ export default function AddHeader() {
       </View>
 
       <Text style={styles.label}>Selecione uma categoria</Text>
-      <Categories />
+      <Categories selected={category} onChange={setCategory} />
       <View style={styles.form}>
-        <Input placeholder="Nome do link" onChangeText={setName} autoCorrect={false} />
-        <Input placeholder="URL do link" onChangeText={setUrl}  autoCorrect={false}/>
+        <Input
+          placeholder="Nome do link"
+          onChangeText={setName}
+          autoCorrect={false}
+        />
+        <Input
+          placeholder="URL do link"
+          onChangeText={setUrl}
+          autoCorrect={false}
+        />
         <Button title="Adicionar link" onPress={handleAdd} />
       </View>
     </View>
