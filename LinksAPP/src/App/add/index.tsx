@@ -35,6 +35,9 @@ export default function AddHeader() {
         category,
       });
 
+      Alert.alert("Sucesso", "Link adicionado com sucesso!", [
+        { text: "OK", onPress: () => router.back() },
+      ]);
     } catch (error) {
       Alert.alert("Erro", "Não foi possível salvar o link!");
       console.log(error);
