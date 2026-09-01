@@ -1,32 +1,46 @@
 import { useState } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { router } from "expo-router";
-
 import { styles } from "./_styles";
+import { router } from "expo-router";
 import { colors } from "@/styles/colors";
-import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Categories } from "@/components/categories";
+import { linkStorage } from "@/strorage/link-storage";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 
 export default function AddHeader() {
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
 
-  function handleAdd() {
-    if (!category) {
-      return Alert.alert("Categoria", "Selecione uma categoria!");
-    }
+  async function handleAdd() {
+    try {
+      if (!category) {
+        return Alert.alert("Categoria", "Selecione uma categoria!");
+      }
 
-    if (!name.trim()) {
-      return Alert.alert("Nome", "Informe o nome do link!");
-    }
+      if (!name.trim()) {
+        return Alert.alert("Nome", "Informe o nome do link!");
+      }
 
-    if (!url.trim()) {
-      return Alert.alert("URL", "Informe a URL do link!");
+      if (!url.trim()) {
+        return Alert.alert("URL", "Informe a URL do link!");
+      }
+
+      await linkStorage.save({
+        id: new Date().getTime().toString(),
+        name,
+        url,
+        category,
+      });
+
+      const data = await linkStorage.get();
+      console.log(data);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível salvar o link!");
+      console.log(error);
     }
-    console.log({ name, url, category });
   }
 
   return (
@@ -55,6 +69,7 @@ export default function AddHeader() {
           placeholder="URL do link"
           onChangeText={setUrl}
           autoCorrect={false}
+          autoCapitalize="none"
         />
         <Button title="Adicionar link" onPress={handleAdd} />
       </View>
