@@ -4,9 +4,10 @@ import {
   Text,
   Image,
   Modal,
+  Alert,
+  Linking,
   FlatList,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
@@ -65,6 +66,15 @@ export default function Index() {
     ]);
   }
 
+  async function handleOpen() {
+    try {
+      await Linking.openURL(link.url);
+      setShowModal(false)
+    } catch (error) {
+      Alert.alert("Link", "Não foi possível abrir o link!");
+    }
+  }
+
   useFocusEffect(
     useCallback(() => {
       getLinks();
@@ -119,7 +129,7 @@ export default function Index() {
                 varient="secondary"
                 onPress={handleDelete}
               />
-              <Option name="Abir" icon="open-in-new" />
+              <Option name="Abir" icon="open-in-new" onPress={handleOpen} />
             </View>
           </View>
         </View>
