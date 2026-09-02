@@ -21,7 +21,7 @@ import { linkStorage, LinkStorage } from "@/strorage/link-storage";
 
 export default function Index() {
   const [showModal, setShowModal] = useState(false);
-  const [link, setLink] = useState<LinkStorage> ({} as LinkStorage);
+  const [link, setLink] = useState<LinkStorage>({} as LinkStorage);
   const [links, setLinks] = useState<LinkStorage[]>([]);
   const [category, setCategory] = useState(categories[0].name);
 
@@ -37,9 +37,32 @@ export default function Index() {
     }
   }
 
-  function handleDetails( selected: LinkStorage ) {
+  function handleDetails(selected: LinkStorage) {
     setShowModal(true);
     setLink(selected);
+  }
+
+  async function linkRemove() {
+    try {
+      await linkStorage.remove(link.id);
+      getLinks();
+      setShowModal(false);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível excluir o link!");
+    }
+  }
+
+  function handleDelete() {
+    Alert.alert("Excluir link", "Deseja realmente excluir o link?", [
+      {
+        style: "cancel",
+        text: "Não",
+      },
+      {
+        text: "Sim",
+        onPress: linkRemove,
+      },
+    ]);
   }
 
   useFocusEffect(
@@ -94,6 +117,7 @@ export default function Index() {
                 name="Excluir"
                 icon="delete-outline"
                 varient="secondary"
+                onPress={handleDelete}
               />
               <Option name="Abir" icon="open-in-new" />
             </View>
